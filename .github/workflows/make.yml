@@ -23,11 +23,13 @@ jobs:
       GOPATH: ${{ github.workspace }}
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
           go-version: ${{ matrix.go-version }}
           check-latest: true
+          # There is no go.mod/go.sum in this GOPATH-mode repository.
+          cache: false
       - name: Run unit tests
         run: |
           go test ./src/labgob ./src/labrpc ./src/mapreduce
